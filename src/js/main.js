@@ -1,9 +1,18 @@
-import { faktorial } from "./math.js";
+import { faktorial, hypergeometric, kombinasi } from "./math.js";
 
 const modifSVG = document.getElementById("histogram");
 
-modifSVG.setAttribute("width", "400");
-modifSVG.setAttribute("height", "200");
+// Ukuran SVG
+const svgWidth = 600;
+const svgHeight = 200;
+
+// Margin dan ukuran batang histogram
+const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+const width = svgWidth - margin.left - margin.right;
+const height = svgHeight - margin.top - margin.bottom;
+
+modifSVG.setAttribute("width", svgWidth);
+modifSVG.setAttribute("height", svgHeight);
 
 function createLine(x1, x2, y1, y2) {
   const newLine = document.createElementNS(
@@ -19,7 +28,7 @@ function createLine(x1, x2, y1, y2) {
   modifSVG.appendChild(newLine);
 }
 
-function createRect(x, y, width, height, text = "0", fill = "blue") {
+function createRect(x, y, width, height, text, fill = "blue") {
   /*
         tinggi y dan height itu harus sesuai dengan y1 y2 dari line , jika kurang maka akan mengambang ,
         jika lebih maka akan melewati line
@@ -59,24 +68,51 @@ function createText(x, y, value = "") {
   modifSVG.appendChild(newText);
 }
 
+const N = 50;
+const n = 20;
+const m = 18;
+const x = 3;
+
 // line
-createLine(20, 400, 180, 180); //x
-createLine(20, 20, 0, 180); //y
+createLine(
+  margin.left,
+  svgWidth - margin.right,
+  svgHeight - margin.bottom,
+  svgHeight - margin.bottom
+); //x
+createLine(margin.left, margin.left, margin.top, svgHeight - margin.bottom); //y
 
 // freq
-for (let i = 0, n = 180; i < 10; i++, n = n - 20) {
-  createText(0, n+15, `${i}`);
-  createLine(20, 400, n, n); //x
+let marginFreq = svgHeight - margin.bottom;
+for (let i = 0, f = 0.0; i <= m; i++, f += 0.05) {
+  createText(margin.right - 2, marginFreq, `${f.toFixed(2)}`);
+  marginFreq -= 20;
+  createLine(margin.left, width, marginFreq, marginFreq); //x
 }
+
 // kategori
+const prob = []; // cari propabilitas
+for (let i = 0; i <= n; i++) {
+  // hypergeometric();// x,N,n,m
+  prob.push(hypergeometric(i, N, n, m));
+}
 
-// block
-createRect(30, 140, 30, 40, "1-20");
-createRect(80, 130, 30, 50, "21-40");
-createRect(130, 100, 30, 80, "41-60");
-createRect(180, 60, 30, 120, "61-80");
-createRect(230, 0, 30, 180, "81-100");
-createRect(280, 120, 30, 60, "101-120");
-createRect(330, 140, 30, 40, "121-140");
+let xbatang = []; // mencari koordinat x untuk block
 
-console.log(faktorial(5))
+for (let i = 0; i <= prob.length; i++) {
+  if (i == 0) {
+    xbatang[i] = margin.left + 10;
+  } else {
+    xbatang[i] = xbatang[i - 1] + 20 + 10;
+  }
+}
+
+for (let index = 0; index < prob.length; index++) {
+  console.log(prob[index]);
+  //
+  let tinggi = (prob[index] * 100) * 4 ;
+  let y = svgHeight - margin.bottom - tinggi;
+  createRect(xbatang[index], y, 20, tinggi, index);
+}
+
+console.log(hypergeometric(3,30,5,18))
