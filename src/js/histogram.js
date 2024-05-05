@@ -1,19 +1,23 @@
-import { createLine, createRect, createText } from "./dom.js";
+import { createLine, createRect, createText, removeChild } from "./dom.js";
 import { hypergeometric } from "./math.js";
 
 const svg = document.getElementById("histogram");
 
-let widthBar = 30;
-let spaceBar = 1;
-let svgWidth = 600; //default
-let svgHeight = 200; //default
-let frekuensi = 0.0;
-let hightFreq = 0;
-let xbar = [];
-let prob = [];
-const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-
 function createHistogram(x, N, n, m) {
+  // clear svg
+  removeChild();
+  
+  // variabel
+  let widthBar = 30;
+  let spaceBar = 1;
+  let svgWidth = 600; //default
+  let svgHeight = 200; //default
+  let frekuensi = 0.0;
+  let hightFreq = 0;
+  let xbar = [];
+  let prob = [];
+  const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+
   // mencari propabilitas
   for (let i = 0; i <= n; i++) {
     prob.push(hypergeometric(i, N, n, m));

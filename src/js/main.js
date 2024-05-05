@@ -1,13 +1,16 @@
 import { createHistogram } from "./histogram.js";
+import { hypergeometric } from "./math.js";
 
 const form = document.getElementById("create");
 
+const x = document.getElementById("successSample");
+const N = document.getElementById("population");
+const n = document.getElementById("sample");
+const m = document.getElementById("sizePopulation");
+const xsamex = document.getElementById("xsample");
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  let x = document.getElementById("successSample").value;
-  let N = document.getElementById("population").value;
-  let n = document.getElementById("sample").value;
-  let m = document.getElementById("sizePopulation").value;
-
-  createHistogram(x, N, n, m);
+  xsamex.value = hypergeometric(x.value, N.value, n.value, m.value);
+  createHistogram(x.value, N.value, n.value, m.value);
 });
