@@ -7,16 +7,36 @@
     <link rel="stylesheet" href="src/css/style.css" />
   </head>
   <body>
-    
+    <form action="#" id="create">
+      <label for="population">N</label>
+      <input id="population" type="number" maxlength="169" />
+      <br />
+      <label for="sample">n</label>
+      <input id="sample" type="number" maxlength="169" />
+      <br />
+
+      <label for="sizePopulation">M</label>
+      <input id="sizePopulation" type="number" maxlength="169" />
+      <br />
+
+      <label for="successSample">X</label>
+      <input id="successSample" type="number" maxlength="169" />
+      <br />
+
+      <label for="xsample">p(x = x)</label>
+      <input id="xsample" type="number" disabled />
+      <br />
+
+      <button type="submit">Send</button>
+    </form>
+
     <div id="container">
       <svg
-        width="400"
-        height="300"
+        width="0"
+        height="0"
         xmlns="http://www.w3.org/2000/svg"
         id="histogram"
-      >
-        
-      </svg>
+      ></svg>
     </div>
     <script type="module" src="src/js/main.js"></script>
   </body>
