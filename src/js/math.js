@@ -23,7 +23,7 @@ function hypergeometric(
     (kombinasi(jmlSPopulasi, jmlSSampel) *
       kombinasi(ukuranPopulasi - jmlSPopulasi, ukuranSampel - jmlSSampel)) /
     kombinasi(ukuranPopulasi, ukuranSampel)
-  ).toPrecision(2);
+  ).toFixed(3);
 }
 
 export { faktorial, kombinasi, hypergeometric };
