@@ -54,4 +54,19 @@ function createText(x, y, value = "") {
   svg.appendChild(newText);
 }
 
-export { createLine, createRect, createText };
+function removeChild() {
+  const line = svg.querySelectorAll("line");
+  const rect = svg.querySelectorAll("rect");
+  const text = svg.querySelectorAll("text");
+  line.forEach((e) => {
+    svg.removeChild(e);
+  });
+  text.forEach((e) => {
+    svg.removeChild(e);
+  });
+  rect.forEach((e) => {
+    svg.removeChild(e);
+  });
+}
+
+export { createLine, createRect, createText, removeChild };
