@@ -25,12 +25,10 @@ function createHistogram(x, N, n, m) {
       hightFreq = prob[i + 1];
     }
   }
-  // debug
-  console.log("frekuensi tertinggi : " + hightFreq);
 
   // mengubah tinggi svg
-  svgHeight = ((hightFreq * 100)/4 )* 20 + margin.bottom + margin.top ;
-  
+  svgHeight = ((hightFreq * 100) / 4) * 20 + margin.bottom + margin.top;
+
   //   membuat ukuran frekuensi
   let marginFreq = svgHeight - margin.bottom;
   let sizeFreq = (hightFreq * 100) / 4;
@@ -53,8 +51,6 @@ function createHistogram(x, N, n, m) {
   for (let i = 0; i < prob.length; i++) {
     let barHeight = prob[i] * 100 * 4;
     let yBar = svgHeight - margin.bottom - barHeight;
-    // debug
-    console.log(`indeks ke ${i} ` + prob[i]  );
 
     if (i == x) {
       createRect(xbar[i], yBar, widthBar, barHeight, i, "red");
@@ -65,7 +61,7 @@ function createHistogram(x, N, n, m) {
 
   // lebar svg
   svgWidth = xbar.pop() + margin.right;
-  
+
   svg.setAttribute("width", svgWidth);
   svg.setAttribute("height", svgHeight);
 
