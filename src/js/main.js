@@ -11,6 +11,17 @@ const xsamex = document.getElementById("xsample");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  xsamex.value = hypergeometric(x.value, N.value, n.value, m.value);
+{
+  const xBigInt = BigInt(x.value);
+  const NBigInt = BigInt(N.value);
+  const nBigInt = BigInt(n.value);
+  const mBigInt = BigInt(m.value);
+
+  const resultBigInt = hypergeometric(xBigInt, NBigInt, nBigInt, mBigInt);
+  xsamex.value = Number(resultBigInt.toString());
+}
+
   createHistogram(x.value, N.value, n.value, m.value);
+
+  console.log(resultBigInt.toString());
 });

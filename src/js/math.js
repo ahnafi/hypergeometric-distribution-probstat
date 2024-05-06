@@ -1,29 +1,25 @@
-function faktorial(num) {
-  if (num === 0 || num === 1) return 1;
-  if (num > 170) return Infinity; // Melebihi batas yang dapat dihitung
-  let result = 1;
-  for (let i = 2; i <= num; i++) {
-    result *= i;
+function faktorial(n) {
+  let result = 1n;
+  for (let i = 2n; i <= n; i++) {
+      result *= i;
   }
   return result;
 }
 
-function kombinasi(a, b) {
-  return faktorial(a) / (faktorial(b) * faktorial(a - b));
+
+function kombinasi(n, k) {
+  if (k < 0 || k > n) {
+      return 0;
+  }
+  return faktorial(n) / (faktorial(k) * faktorial(n - k));
 }
 
-function hypergeometric(
-  jmlSSampel,
-  ukuranPopulasi,
-  ukuranSampel,
-  jmlSPopulasi
-) {
-  //
-  return (
-    (kombinasi(jmlSPopulasi, jmlSSampel) *
-      kombinasi(ukuranPopulasi - jmlSPopulasi, ukuranSampel - jmlSSampel)) /
-    kombinasi(ukuranPopulasi, ukuranSampel)
-  ).toFixed(3);
+function hypergeometric(jmlSSampel, ukuranPopulasi, ukuranSampel, jmlSPopulasi) {
+  const numerator = BigInt(kombinasi(jmlSPopulasi, jmlSSampel)) *
+      BigInt(kombinasi(ukuranPopulasi - jmlSPopulasi, ukuranSampel - jmlSSampel));
+  const denominator = BigInt(kombinasi(ukuranPopulasi, ukuranSampel));
+  
+  return (Number(numerator.toString()) / Number(denominator.toString()));
 }
 
 export { faktorial, kombinasi, hypergeometric };
