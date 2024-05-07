@@ -8,8 +8,8 @@ function createHistogram(x, N, n, m) {
   removeChild();
   
   // variabel
-  let widthBar = 30;
-  let spaceBar = 1;
+  let widthBar = n <= 20 ? 30 : 10;
+  let spaceBar = n <= 20 ? 1 : 6;
   let svgWidth = 600; //default
   let svgHeight = 200; //default
   let frekuensi = 0.0;
