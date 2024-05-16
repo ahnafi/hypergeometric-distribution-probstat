@@ -37,7 +37,7 @@ function createHistogram(x, N, n, m) {
   let marginFreq = svgHeight - margin.bottom;
   let sizeFreq = (hightFreq * 100) / 4;
   for (let i = 0; i < sizeFreq; i++) {
-    createText(margin.right - 2, marginFreq, `${frekuensi.toFixed(2)}`);
+    createText(margin.right-7, marginFreq, `${frekuensi.toFixed(2)}`);
     frekuensi += 0.05;
     marginFreq -= 20;
   }
