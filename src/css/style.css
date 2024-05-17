@@ -3,3 +3,7 @@
         color: white;
         background: linear-gradient(to top right, #0A0615 0%, #263169 100%);
     }
+
+    #canvas-svg {
+        background-color: white;
+    }
